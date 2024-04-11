@@ -1,0 +1,13 @@
+  How does a pod work?
+Pods are created by workload resources called controllers, which manage rollout, replication, and health of pods in the cluster. For example, if a node in the cluster fails, a controller detects that the pods on that node are unresponsive and creates replacement pod(s) on other nodes.
+
+The three most common types of controllers are:
+
+Jobs for batch-type jobs that are ephemeral, and will run a task to completion
+Deployments for applications that are stateless and persistent, such as web servers (HPPT servers)
+StatefulSets for applications that are both stateful and persistent such as databases
+If a pod has multiple containers, they are all scheduled together on the same server in the cluster, whether VM or physical server. All containers in the pod share their resources and dependencies and can coordinate their execution and termination. For example, pods can contain ‘init’ containers that run before the application containers run, setting up the environment for the applications that follow.
+
+Pods are almost always created by controllers which then can automatically manage the pod lifecycle, including replacing failed pods, replicating pods when necessary, and evicting the pod from cluster nodes when they are complete or no longer needed.
+
+Controllers use information in a pod template to create the pods, and controllers ensure that running pods match the deployment defined in the pod template, for example by creating replicas to match the number defined in the deployment.
